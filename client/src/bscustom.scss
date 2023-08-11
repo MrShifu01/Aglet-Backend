@@ -1,12 +1,13 @@
 // Bootstrap Customization
 $primary: #007bff;
 $dark: #020202;
+$body-bg: #111;
 
 .w-custom-90 {
-    width: 90%;
+    width: 90vw;
 }
 .h-custom-90 {
-    height: 90%;
+    height: 90vh;
 }
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss"

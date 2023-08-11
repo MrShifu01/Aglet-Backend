@@ -3,17 +3,19 @@ import React from "react";
 const Header = () => {
   return (
     <>
-      <div className="section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 d-flex alig">
-                <h1 className="text-white">Header</h1>
-                <a href="/" className="nav-link">Home</a>
-                <a href="/" className="nav-link">Contact</a>
-            </div>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-transparent rounded-top-2">
+        <div className="container-fluid my-3 mx-5">
+          <a className="navbar-brand" href="/">Home</a>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/">Movies</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/">Contact</a>
+              </li>
+            </ul>
           </div>
-        </div>
-      </div>
+      </nav>
     </>
   );
 };

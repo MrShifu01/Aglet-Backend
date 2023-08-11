@@ -1,11 +1,15 @@
-import "./style.css"
-import Header from "./components/Header";
+import "./style.css";
+import Hero from "./components/Hero";
+import Categories from "./components/Categories";
 
 function App() {
   return (
     <>
-      <div className="w-custom-90 h-custom-90 mx-auto bg-primary mt-5">
-        <Header/>
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="w-custom-90 h-custom-90 bg-dark rounded-2">
+          <Hero className="position-relative" />
+          <Categories />
+        </div>
       </div>
     </>
   );
