@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import FavouritesPage from './pages/FavouritesPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import ContactPage from './pages/FavouritesPage';
+import ContactPage from './pages/ContactPage';
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "./style.css";

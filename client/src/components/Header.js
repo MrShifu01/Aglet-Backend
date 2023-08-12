@@ -10,7 +10,7 @@ const Header = () => {
           <Navbar.Brand className="text-white opacity-75 home-link" href="/">Home</Navbar.Brand>
           <Nav className="navbar-nav">
             <Nav.Item className="pe-3">
-              <Nav.Link className="text-white opacity-75 contact-link" href="/">Contact</Nav.Link>
+              <Nav.Link className="text-white opacity-75 contact-link" href="/contact">Contact</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/favourites">

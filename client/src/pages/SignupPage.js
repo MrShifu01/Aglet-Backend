@@ -1,12 +1,18 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const SignupPage = () => {
-    return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-          <div className="main-container w-custom-90 h-custom-90 bg-dark rounded-3 overflow-hidden overflow-y-auto">
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <div className="main-container w-custom-90 h-custom-90 bg-dark rounded-3 overflow-hidden overflow-y-auto">
+        <div className="auth-bg">
+          <div className="auth-content">
+            <Header />
             <h2 className="text-center text-white mt-5 pt-5">Sign Up</h2>
-            <form className="container mt-5 text-white"> {/* Added 'text-white' class here */}
+            <form className="container mt-5 text-white">
+              {" "}
+              {/* Added 'text-white' class here */}
               <div className="form-group">
                 <label className="mt-4">Email address</label>
                 <input
@@ -50,12 +56,14 @@ const SignupPage = () => {
               </button>
             </form>
             <div className="d-flex justify-content-center mt-5">
-                <h5 className="me-2 text-white">Don't have an account?</h5>
-                  <Link to={"/login"}>Login</Link>
+              <h5 className="me-2 text-white">Already have an account?</h5>
+              <Link to={"/login"}>Login</Link>
             </div>
           </div>
         </div>
-      );
-}
+      </div>
+    </div>
+  );
+};
 
-export default SignupPage
+export default SignupPage;

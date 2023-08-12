@@ -7,7 +7,7 @@ const HomePage = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="main-container w-custom-90 h-custom-90 bg-dark rounded-3 overflow-hidden overflow-y-auto">
+      <div className="main-container position-relative w-custom-90 h-custom-90 bg-dark rounded-3 overflow-hidden overflow-y-auto">
         <Hero className="position-relative" />
         <Categories />
         <MoviePosters />
