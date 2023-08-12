@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import FavouritesPage from './pages/FavouritesPage';
@@ -12,6 +13,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const queryClient = new QueryClient();
+axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.withCredentials = true
 
 function App() {
   return (

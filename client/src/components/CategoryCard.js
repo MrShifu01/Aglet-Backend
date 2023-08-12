@@ -4,14 +4,16 @@ const CategoryCard = ({ category }) => {
   let videoRef = React.createRef();
 
   const handleMouseOver = () => {
-    videoRef.current.play();
+    // Using Promise-based approach for play()
+    videoRef.current.play().catch((error) => {
+      console.error("Video play failed:", error);
+    });
   };
 
   const handleMouseOut = () => {
     videoRef.current.pause();
     videoRef.current.currentTime = 0; // reset video to start
   };
-
 
   return (
     <>

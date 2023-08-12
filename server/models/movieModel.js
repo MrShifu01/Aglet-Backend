@@ -56,10 +56,6 @@ const movieSchema = new mongoose.Schema({
   vote_count: {
     type: Number,
     required: true
-  },
-  isFavourite: {
-    type: Boolean,
-    default: false
   }
 }, {
   timestamps: true

@@ -14,7 +14,7 @@ const ContactPage = () => {
           <div className="contact-text opacity-75">
             <p>Christian Stander</p>
             <p>tel: 0632934685</p>
-            <p>emial: stander.christian@gmail.com</p>
+            <p>email: stander.christian@gmail.com</p>
           </div>
         </div>
       </div>

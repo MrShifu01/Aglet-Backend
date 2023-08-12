@@ -5,6 +5,5 @@ const router = express.Router();
 router.get('/', getMovies);
 router.get('/favourites', getFavouriteMovies)
 router.put('/:id/favourite', updateFavouriteMovie);
-// router.get('/:id', getMovieById);
 
 export default router;

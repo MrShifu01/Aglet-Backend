@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query"; // Notice the change from useInfiniteQuery to useQuery
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { Modal, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 const FavouriteMovies = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const queryClient = useQueryClient();
 
   const fetchMovies = async () => {
     const response = await axios.get("/api/movies/favourites");
@@ -17,7 +16,7 @@ const FavouriteMovies = () => {
 
   const [movies, setMovies] = React.useState([]); // Initialize with empty array
 
-  const { data, isError, error, isFetching } = useQuery(
+  const { isError, error, isFetching } = useQuery(
     "favourite movies",
     fetchMovies,
     {
@@ -73,9 +72,7 @@ const FavouriteMovies = () => {
       <div className="movie-grid px-5">
         {movies.map((movie) => (
           <div key={movie.id}>
-            <div
-              className="movie-poster-container border-0"
-            >
+            <div className="movie-poster-container border-0">
               <img
                 className="movie-poster"
                 onClick={() => handlePosterClick(movie)}
