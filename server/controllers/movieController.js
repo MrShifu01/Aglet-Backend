@@ -5,23 +5,72 @@ import Movie from "../models/movieModel.js";
 // @route   GET /api/movies
 // @access  Public
 const getMovies = asyncHandler(async (req, res) => {
-    const movies = await Movie.find({});
-    res.json(movies);
-    }   
-);
+    try {
+        const { page = 1 } = req.query;
+        const limit = 9;
+        const startIndex = (page - 1) * limit;
 
-// @desc    Fetch single movie
-// @route   GET /api/movies/:id
-// @access  Public
-const getMovieById = asyncHandler(async (req, res) => {
-    const movie = await Movie.findById(req.params.id);
-    if (movie) {
-        res.json(movie);
-    } else {
-        res.status(404);
-        throw new Error("Movie not found");
+        const movies = await Movie.find().skip(startIndex).limit(limit);
+        const totalDocuments = await Movie.countDocuments();
+
+        const nextPage = page * limit < totalDocuments ? parseInt(page) + 1 : null;
+
+        res.json({
+            movies,
+            nextPage
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-}
-);
+});
 
-export { getMovies, getMovieById };
+// @desc    Fetch favourite movies
+// @route   GET /api/movies/favourites
+// @access  Public
+const getFavouriteMovies = asyncHandler(async (req, res) => {
+    try {
+        const movies = await Movie.find({ isFavourite: true });
+        res.json({
+            movies,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// @desc    Toggle favourite status of a movie
+// @route   PUT /api/movies/:id/favourite
+// @access  Private
+const updateFavouriteMovie = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Find the movie by its ID
+        const movie = await Movie.findById(id);
+        
+        // If the movie does not exist, return an error
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+
+        // Toggle the isFavourite field
+        movie.isFavourite = !movie.isFavourite;
+
+        // Save the updated movie
+        await movie.save();
+
+        res.json(movie);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+
+
+
+export { getMovies, getFavouriteMovies, updateFavouriteMovie };

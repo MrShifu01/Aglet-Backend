@@ -4,11 +4,15 @@
   box-sizing: border-box;
 }
 
+.main-container {
+  box-shadow: 0 0 100px 6px rgba(255, 255, 255, 0.1);
+}
+
 .hero-image {
   background: url("../public/hero.jpeg");
   background-size: cover;
   background-position: center;
-  height: 40%;
+  height: 50%;
   width: 100%;
   position: relative; /* Added this */
 }
@@ -17,22 +21,211 @@
   content: "";
   top: 0;
   left: 0;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), #020202); /* Changed this from background-color to background-image */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), #020202); /* Changed this from background-color to background-image */
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
+.category-container {
+  margin-top: 1rem;
+}
+
 .category-image-container {
-  width: 300px;
+  width: 350px;
+  height: 200px;
   border-radius: 10px;
   overflow: hidden;
+  transition: opacity 0.3s;
+  display: block;
+  max-width: 100%;
+  position: relative;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 100px 6px rgba(255, 255, 255, 0.1);
+}
+
+.category-image-container video {
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .category-heading {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-weight: bold;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.category-image-container:hover .category-heading {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.movie-grid {
+  margin: 0 80px;
+  margin-top: 40px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap as required */
+}
+
+.movie-poster-container {
+  position: relative;
+  width: 135px;
+  height: 200px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 100px 6px rgba(255, 255, 255, 0.1);
+}
+
+.movie-poster-container:hover {
+  cursor: pointer;
+  transform: translateY(-10px);
+  opacity: 0.8;
+}
+
+.movie-poster {
+  width: 100%; /* Set to the full width of the container */
+  height: 100%; /* Set to the full height of the container */
+  -o-object-fit: cover;
+     object-fit: cover; /* This will ensure that the image covers the entire element and will be clipped if its aspect ratio doesn't match the element's */
+}
+
+.favourite-icon {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: opacity 0.3s;
+}
+
+.favourite-icon:hover {
+  transform: scale(1.5);
+}
+
+.more-button {
+  transition: all 0.3s ease-in-out;
+}
+
+.more-button:hover {
+  transform: scale(1.1);
+}
+
+.movie-heading {
+  margin-top: 75px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 177px;
+}
+
+.favourites-nav-link {
+  width: 30px;
+  opacity: 0.5;
+  margin-top: -2px;
+  margin-right: 1rem;
+}
+
+.favourites-nav-link:hover {
+  opacity: 0.9;
+  scale: 1.1;
+}
+
+.favourites-nav-link:active {
+  scale: 0.9;
+}
+
+.home-link:hover {
+  opacity: 0.9;
+  scale: 1.1;
+}
+
+.home-link:active {
+  scale: 0.9;
+}
+
+.contact-link {
+  transition: all 0.3s ease-in-out;
+}
+
+.contact-link:hover {
+  scale: 1.1;
+}
+
+.contact-link:active {
+  scale: 1;
+}
+
+.avatar {
+  padding-left: 1rem;
+  margin: -1rem;
+  width: 70px;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-menu {
   color: #fff;
-  transform: translateX(-50%) translateY(-50%);
+  left: -50px !important; /* Adjust this value as needed */
+}
+
+.navbar .dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-text {
+  color: rgba(255, 255, 255, 0.7) !important; /* This makes the text white */
+}
+
+.dropdown-text:hover {
+  color: #fff !important; /* This makes the text black on hover */
+  background-color: #020202 !important; /* Optional: Adds a subtle background on hover */
+}
+
+.heart-bg {
+  position: absolute;
+  width: 10px;
+  height: 40px;
+  top: 0px;
+  right: 0px;
+  background-color: #fff;
+  filter: blur(15px);
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.favourites-heart {
+  position: absolute;
+  width: 20px;
+  top: 1px;
+  right: 1px;
+  z-index: 2;
+}
+
+.white-placeholder {
+  background-color: transparent; /* or set a color that contrasts with white */
+  border: 1px solid white; /* optional: setting a border to make it visible */
+  color: white;
+}
+
+.white-placeholder::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
+}
+
+.white-placeholder::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
 }/*# sourceMappingURL=style.css.map */

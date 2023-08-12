@@ -1,17 +1,33 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import FavouritesPage from './pages/FavouritesPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import ContactPage from './pages/FavouritesPage';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import "./style.css";
-import Hero from "./components/Hero";
-import Categories from "./components/Categories";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <>
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="w-custom-90 h-custom-90 bg-dark rounded-2">
-          <Hero className="position-relative" />
-          <Categories />
-        </div>
-      </div>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/favourites" element={<FavouritesPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </Router>
+      <ReactQueryDevtools />
+      <ToastContainer />
+    </QueryClientProvider>
   );
 }
 

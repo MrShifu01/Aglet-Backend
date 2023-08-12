@@ -1,8 +1,10 @@
 import express from 'express';
-import { getMovieById, getMovies } from '../controllers/movieController.js';
+import { getMovies, getFavouriteMovies, updateFavouriteMovie } from '../controllers/movieController.js';
 const router = express.Router();
 
 router.get('/', getMovies);
-router.get('/:id', getMovieById);
+router.get('/favourites', getFavouriteMovies)
+router.put('/:id/favourite', updateFavouriteMovie);
+// router.get('/:id', getMovieById);
 
 export default router;

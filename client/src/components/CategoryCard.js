@@ -1,14 +1,38 @@
-import React from 'react'
+import React from "react";
 
-const CategoryCard = () => {
+const CategoryCard = ({ category }) => {
+  let videoRef = React.createRef();
+
+  const handleMouseOver = () => {
+    videoRef.current.play();
+  };
+
+  const handleMouseOut = () => {
+    videoRef.current.pause();
+    videoRef.current.currentTime = 0; // reset video to start
+  };
+
+
   return (
     <>
-        <div className='category-image-container position-relative'>
-            <img src="thumbnails/action.png" width={"300px"} alt="action highway" />
-            <h2 className='category-heading'>Action</h2>
-        </div>
+      <div
+        className="category-image-container position-relative"
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
+        <video
+          ref={videoRef}
+          src={category.video}
+          width="300px"
+          poster={category.thumbnail}
+          muted
+        >
+          Your browser does not support the video tag.
+        </video>
+        <h2 className="category-heading">{category.title}</h2>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default CategoryCard
+export default CategoryCard;
