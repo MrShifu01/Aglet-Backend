@@ -23,7 +23,7 @@ const BlurUpImage = (props) => {
           ? `url(${highResImage})` 
           : `url(${lowResImage})`,
         backgroundPosition: "center center",
-        transform: "translateY(-92px)"
+        transform: "translateY(-89px)"
       }}
     />
   );

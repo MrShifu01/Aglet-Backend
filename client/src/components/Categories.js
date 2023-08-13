@@ -27,7 +27,7 @@ const categoriesData = [
 const Categories = () => {
   return (
     <>
-      <div className="category-container d-flex gap-2 justify-content-center">
+      <div className="category-container d-flex flex-wrap gap-2 justify-content-center">
         {categoriesData.map((category, index) => (
           <div
             className="category-image-container position-relative"

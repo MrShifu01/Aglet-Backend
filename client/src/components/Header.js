@@ -14,12 +14,14 @@ const Header = ({ isHighRes }) => {
         style={style}
         bg="transparent"
         expand="lg"
-        className="rounded-top-2"
+        className="rounded-top-2 navbar-text-dark"
       >
         <div className="container-fluid my-3 mx-5">
           <Navbar.Brand className="text-white opacity-75 home-link" href="/">
             Home
           </Navbar.Brand>
+          <Navbar.Toggle className="custom-toggle" aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="navbar-nav">
             <Nav.Item className="pe-3">
               <Nav.Link
@@ -74,6 +76,7 @@ const Header = ({ isHighRes }) => {
               )}
             </NavDropdown>
           </Nav>
+          </Navbar.Collapse>
         </div>
       </Navbar>
     </>

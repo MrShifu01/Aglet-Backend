@@ -41,7 +41,7 @@ const ContactPage = () => {
               rel="noreferrer"
             >
               <img
-                className="opacity-75 contact-icons"
+                className="opacity-75 contact-icons pb-1"
                 src="portfolio.png"
                 alt="portfolio"
               />

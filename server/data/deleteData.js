@@ -1,5 +1,6 @@
 import connectDB from '../config/db.js';
 import Movie from '../models/movieModel.js';
+import User from '../models/userModel.js';
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -7,6 +8,7 @@ dotenv.config()
 const deleteData = async () => {
     try {
         await Movie.deleteMany();
+        await User.deleteMany();
         
         console.log('Data delete success');
         process.exit();
