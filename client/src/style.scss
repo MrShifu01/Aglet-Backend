@@ -1,24 +1,26 @@
+/* Global reset for margins, padding and box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Styling for the main container */
 .main-container {
   box-shadow: 0 0 100px 6px rgba(255, 255, 255, 0.1);
 }
 
-
-
+/* Hero image styling */
 .hero-image {
   background: url("../public/hero.jpeg");
   background-size: cover;
   background-position: center;
   height: 50%;
   width: 100%;
-  position: relative; /* Added this */
+  position: relative; 
 }
 
+/* Gradient overlay for the hero image */
 .hero-image:before {
   content: "";
   top: 0;
@@ -27,16 +29,18 @@
     to bottom,
     rgba(0, 0, 0, 0.3),
     #020202
-  ); /* Changed this from background-color to background-image */
+  ); 
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
+/* Styling for the category container */
 .category-container {
   margin-top: 1rem;
 }
 
+/* Styling for the container of each category image */
 .category-image-container {
   width: 350px;
   height: 200px;
@@ -50,6 +54,7 @@
   box-shadow: 0 0 100px 6px rgba(255, 255, 255, 0.1);
 }
 
+/* Styling for videos inside the category image container */
 .category-image-container video {
   width: 100%;
   height: 100%;
@@ -57,6 +62,7 @@
   object-fit: cover;
 }
 
+/* Styling for category headings */
 .category-heading {
   position: absolute;
   top: 50%;
@@ -73,15 +79,17 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Styling for the movie grid layout */
 .movie-grid {
   margin: 0 80px;
   margin-top: 40px;
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Adjust the gap as required */
+  gap: 20px;
 }
 
+/* Styling for the container of each movie poster */
 .movie-poster-container {
   position: relative;
   width: 135px;
@@ -102,16 +110,18 @@
   opacity: 0.8;
 }
 
+/* Styling for the movie poster image */
 .movie-poster {
-  width: 100%; /* Set to the full width of the container */
-  height: 100%; /* Set to the full height of the container */
-  object-fit: cover; /* This will ensure that the image covers the entire element and will be clipped if its aspect ratio doesn't match the element's */
+  width: 100%;
+  height: 100%; 
+  object-fit: cover; 
 }
 
+/* Styling for the favourite icon on each movie poster */
 .favourite-icon {
   position: absolute;
-  top: 10px; /* Adjust as needed */
-  right: 10px; /* Adjust as needed */
+  top: 10px; 
+  right: 10px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -123,6 +133,7 @@
   transform: scale(1.5);
 }
 
+/* Styling for the 'Load More' button */
 .more-button {
   transition: all 0.3s ease-in-out;
 }
@@ -131,6 +142,7 @@
   transform: scale(1.1);
 }
 
+/* Styling for movie heading */
 .movie-heading {
   margin-top: 75px;
   font-size: 1.2rem;
@@ -145,15 +157,17 @@
   margin-left: 177px;
 }
 
+/* Styling for the background of favourites page */
 .favourites-bg {
   background: url("../public/favourites.jpeg");
   background-size: cover;
   background-position: center 2000px;
   width: 100%;
   height: 100%;
-  position: relative; /* Added this */
+  position: relative;
 }
 
+/* Gradient overlay for the favourites page background */
 .favourites-bg:before {
   content: "";
   top: 0;
@@ -162,17 +176,19 @@
     to bottom,
     rgba(0, 0, 0, 0.3),
     #020202
-  ); /* Changed this from background-color to background-image */
+  );
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
+/* Styling for the content within the favourites page */
 .favourites-content {
   margin-top: 350px;
   padding-bottom: 100px ;
 }
 
+/* Styling for the nav-links within the favourites page */
 .favourites-nav-link {
   width: 30px;
   opacity: 0.5;
@@ -180,6 +196,7 @@
   margin-right: 1rem;
 }
 
+/* Hover and active effects for navigation links in favourites */
 .favourites-nav-link:hover {
   opacity: 0.9;
   scale: 1.1;
@@ -189,6 +206,7 @@
   scale: 0.9;
 }
 
+/* Hover and active effects for home link */
 .home-link:hover {
   opacity: 0.9;
   scale: 1.1;
@@ -198,6 +216,7 @@
   scale: 0.9;
 }
 
+/* Hover and active effects for contact link */
 .contact-link{
   transition: all 0.3s ease-in-out;
 }
@@ -210,6 +229,7 @@
   scale: 1;
 }
 
+/* Styling for user avatar in navigation bar */
 .avatar {
   padding-left: 1rem;
   margin: -1rem;
@@ -218,24 +238,29 @@
   transition: all 0.3s ease-in-out;
 }
 
+/* Styling for dropdown menu in the navbar */
 .dropdown-menu {
   color: #fff;
-  left: -50px !important;  /* Adjust this value as needed */
+  left: -50px !important;
 }
 
+/* Removes the dropdown arrow from the navbar dropdown */
 .navbar .dropdown-toggle::after {
   display: none;
 }
 
+/* Styling for text in dropdown menu */
 .dropdown-text {
-  color: rgba(255, 255, 255, 0.7) !important; /* This makes the text white */
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
+/* Hover effect for dropdown text */
 .dropdown-text:hover {
-  color: #fff !important; /* This makes the text black on hover */
-  background-color: #020202 !important; /* Optional: Adds a subtle background on hover */
+  color: #fff !important;
+  background-color: #020202 !important;
 }
 
+/* Background effect for the heart icon in favourites */
 .heart-bg {
   position: absolute;
   width: 10px;
@@ -248,6 +273,7 @@
   border-radius: 50%;
 }
 
+/* Styling for the heart icon in favourites */
 .favourites-heart {
   position: absolute;
   width: 20px;
@@ -256,6 +282,7 @@
   z-index: 2;
 }
 
+/* Styling for authentication pages (login & signup) background */
 .auth-bg {
   background: url("../public/auth.jpeg");
   background-size: cover;
@@ -265,6 +292,7 @@
   position: relative;
 }
 
+/* Gradient overlay for authentication pages background */
 .auth-bg:before {
   content: "";
   top: 0;
@@ -273,27 +301,31 @@
     to bottom,
     rgba(0, 0, 0, 0.3),
     #020202
-  ); /* Changed this from background-color to background-image */
+  ); 
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
+/* Content styling for authentication pages */
 .auth-content {
   position: relative;
   z-index: 100;
 }
 
+/* Styling for input fields with a white border */
 .white-placeholder {
-  background-color: transparent;  /* or set a color that contrasts with white */
-  border: 1px solid white;  /* optional: setting a border to make it visible */
+  background-color: transparent; 
+  border: 1px solid white;
   color: white;
 }
 
+/* Styling for placeholders in input fields */
 .white-placeholder::placeholder {
-  color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
+  color: rgba(255, 255, 255, 0.7);
 }
 
+/* Styling for contact page heading */
 .contact-heading {
   position: absolute;
   font-size: 7rem;
@@ -301,6 +333,7 @@
   left: 3%;
 }
 
+/* Styling for background of contact page */
 .contact-bg {
   background-image: url("../public/contactblur.jpg");
   background-size: cover;
@@ -310,6 +343,7 @@
   transition: background-image 5s;
 }
 
+/* Styling for high resolution background when loaded */
 .contact-bg.high-res-loaded {
   background-image: url("../public/contact.jpeg");
   background-size: cover;
@@ -318,6 +352,7 @@
   height: 100%;
 }
 
+/* Styling for heading and text in contact page */
 .contact-heading, .contact-text{ 
   color: white;
   position: absolute;
@@ -325,74 +360,90 @@
   opacity: 1!important;
 }
 
+/* Styling for contact page text */
 .contact-text {
   font-size: 1rem;
   left: 3%;
   top: 30%;
 }
 
+/* Styling for contact icons */
 .contact-icons {
   width: 60px;
   transition: all 0.3s ease-in-out;
 }
 
+/* Hover effect for contact icons */
 .contact-icons:hover {
   transform: scale(1.1);
   filter: brightness(1.2);
 }
 
+/* Active state effect for contact icons */
 .contact-icons:active{
   transform: scale(1);
 }
 
+/* Styling for custom modal dialog */
 .custom-modal .modal-dialog {
   color: #fff;
-  max-width: 90%; /* Adjusting width */
+  max-width: 90%;
   box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-  margin: auto 5%; /* Centering horizontally */
-  top: 62.5%; /* Adjust this to control how low the modal appears */
-  transform: translateY(-60%); /* Shifts it up by half its height to center it vertically starting from the 60% top position */
+  margin: auto 5%;
+  top: 62.5%;
+  transform: translateY(-60%);
 }
 
+/* Styling for darker modal backdrop */
 .darker-backdrop.modal-backdrop {
-  background-color: rgba(0, 0, 0, 1); /* Increase the opacity value (0.85 in this case) to make it darker */
+  background-color: rgba(0, 0, 0, 1);
 }
 
+/* Styling for movie poster in modal */
 .modal-movie-poster {
   width: 200px;
 }
 
+/* Text styling for modal content */
 .modal-text {
   color: #fff;
 }
 
+/* Toggle effect for custom UI components */
 .custom-toggle {
   filter: invert(1);
 }
 
+/* Styling for the main navigation bar */
 .navbar {
   background-color: #020202!important;
 }
 
+/* Padding for the content within favourites page */
 .favourites-content {
   padding-top: 40px;
 }
 
-
+/* Media queries for mobile devices */
 @media (max-width: 768px) {
+
+  /* Adjusted styles for movie grid layout on mobile */
   .movie-grid {
     margin: 0 20px;
   }
 
+  /* Adjusted avatar position on mobile */
   .avatar {
     padding-right: 20px;
   }
 
+  /* Adjusted margin for movie heading on mobile */
   .movie-heading {
     margin-left: 0;
   }
   
+  /* Adjusted styles for contact page background on mobile */
   .contact-bg.high-res-loaded {
     background-image: url("../public/contact.jpeg");
     filter: brightness(0.2);
@@ -402,48 +453,51 @@
     background-attachment: fixed;
   }
 
+  /* Adjusted styles for contact page heading on mobile */
   .contact-heading {
     font-size: 3rem;
-    color: white; /* Ensuring the text is white */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: Add a shadow for better readability */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
   }
 
+  /* Adjusted styles for contact page text on mobile */
   .contact-text {
     font-size: 1rem;
     color: var(--bs-primary);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: Add a shadow for better readability */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
   .contact-text a {
     color: white; /* Ensuring the text is white */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: Add a shadow for better readability */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
+  /* Adjusted styles for contact icons on mobile */
   .contact-icons {
     width: 80px;
   }
 
-
-
+  /* Adjusted margins for movie headings in favourites on mobile */
   .movie-heading-fav {
     margin: 50px;
   }
 
+  /* Adjusted margins for movie heading on mobile */
   .movie-heading {
     margin: 50px;
   }
 
+  /* Adjusted styles for navbar collapse on mobile */
   .navbar-collapse {
-    position: absolute;  /* or use 'fixed' if you want it to be fixed relative to the viewport */
-    top: 70px;  /* height of your navbar */
+    position: absolute;
+    top: 70px;
     left: 0;
-    width: 100%;  /* full width */
-    z-index: 1050;  /* higher than other content */
-    background-color: rgba(0,0,0,0.9);  /* semi-transparent black */
+    width: 100%;
+    z-index: 1050;
+    background-color: rgba(0,0,0,0.9); 
     display: flex;
     padding-right: 40px;
     padding-top: 10px;
     padding-bottom: 10px;
   }
-
 }

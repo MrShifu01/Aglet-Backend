@@ -412,7 +412,7 @@
     margin: 50px;
   }
   .navbar-collapse {
-    position: absolute; /* or use 'fixed' if you want it to be fixed relative to the viewport */
+    position: absolute;
     top: 70px; /* height of your navbar */
     left: 0;
     width: 100%; /* full width */

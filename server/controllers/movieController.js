@@ -66,8 +66,4 @@ const updateFavouriteMovie = asyncHandler(async (req, res) => {
     }
 });
 
-
-
-
-
 export { getMovies, getAllMovies, updateFavouriteMovie };

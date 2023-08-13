@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+// Importing necessary React functionalities and other dependencies
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import MovieModal from "./MovieModal";
 import { useQuery } from "react-query";
 
 const FavouriteMovies = () => {
+  // Retrieve user data from local storage or default to an empty object
   const userData = JSON.parse(localStorage.getItem("userData")) || {};
+
+  // State for modal visibility, the selected movie, and the user's favourite movies
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [userFavourites, setUserFavourites] = useState(userData?.favourites || []);
 
+  // Function to fetch movies from the API
   const fetchMovies = async () => {
     const response = await axios.get("/api/movies/all");
     return response.data;
   };
 
+  // Fetching movies using react-query's useQuery hook
   const {
     data: moviesData,
     error,
@@ -22,16 +28,18 @@ const FavouriteMovies = () => {
     isFetching,
   } = useQuery("movies", fetchMovies);
 
-  // Filter the movies based on userFavourites
+  // Filter the movies based on user's favourites
   const favouriteMovies = Array.isArray(moviesData) 
     ? moviesData.filter((movie) => userFavourites.includes(movie._id))
     : [];
 
+  // Handle click on the movie poster to open the modal
   const handlePosterClick = (movie) => {
     setSelectedMovie(movie);
     setShowModal(true);
   };
 
+  // Handle adding/removing a movie from the user's favourites
   const toggleFavourite = async (movieId) => {
     const isFavourite = userFavourites.includes(movieId);
     let updatedFavourites;
@@ -51,14 +59,13 @@ const FavouriteMovies = () => {
       });
     }
     
-    // Update state
+    // Update the favourites in state and local storage
     setUserFavourites(updatedFavourites);
-    
-    // Update local storage
     userData.favourites = updatedFavourites;
     localStorage.setItem("userData", JSON.stringify(userData));
   };
 
+  // Display an error if there's an issue fetching movies
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
@@ -76,6 +83,7 @@ const FavouriteMovies = () => {
         </div>
       )}
       <div className="movie-grid px-5">
+        {/* Map through the favourite movies to show them on the page */}
         {favouriteMovies.map((movie) => (
           <div key={movie.id}>
             <div className="movie-poster-container border-0">
@@ -113,6 +121,7 @@ const FavouriteMovies = () => {
           </div>
         )}
       </div>
+      {/* Render the MovieModal with the selected movie data */}
       <MovieModal
         showModal={showModal}
         setShowModal={setShowModal}
@@ -122,4 +131,5 @@ const FavouriteMovies = () => {
   );
 };
 
+// Export the component for use in other parts of the app
 export default FavouriteMovies;
