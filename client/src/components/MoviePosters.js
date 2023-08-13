@@ -1,73 +1,25 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
-import { Modal, Button } from "react-bootstrap";
+import React, { useState } from "react";
 import { useAuth } from "./useAuth";
+import MovieModal from "./MovieModal";
 
-import { toast } from "react-toastify";
+import useFavourites from "./useFavourites";
+import useMovies from "./useMovies";
 
 const MoviePosters = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [page, setPage] = React.useState(1);
+
   const { isLoggedIn } = useAuth();
-
-  const fetchMovies = async ({ pageParam = 1 }) => {
-    const response = await axios.get("/api/movies", {
-      params: {
-        page: pageParam,
-      },
-    });
-    return response.data;
-  };
-
+  const { userFavourites, toggleFavourite } = useFavourites();
   const {
-    data,
+    moviesData,
     isError,
     error,
     isFetching,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(["movies", page], fetchMovies, {
-    getNextPageParam: (lastPage) => lastPage.nextPage || undefined,
-  });
-
-  const queryClient = useQueryClient();
-
-  const updateFavouriteMutation = useMutation(
-    (movieId) => axios.put(`/api/movies/${movieId}/favourite`),
-    {
-      onSuccess: (data, variables) => {
-        // Update the local data after mutation
-        queryClient.setQueryData(["movies", page], (oldData) => {
-          const newData = { ...oldData };
-          for (let page of newData.pages) {
-            const movieToUpdate = page.movies.find(
-              (movie) => movie._id === variables
-            );
-            if (movieToUpdate) {
-              movieToUpdate.isFavourite = !movieToUpdate.isFavourite;
-              break; // break out of loop since we found the movie
-            }
-          }
-          return newData;
-        });
-        toast.success("Favourite status updated!", {
-          position: toast.POSITION.BOTTOM_CENTER,
-          autoClose: 2000,
-        });
-      },
-
-      onError: (error) => {
-        console.error("Failed to update favourite status:", error);
-        toast.error("Failed to update favourite status", {
-          position: toast.POSITION.BOTTOM_CENTER,
-          autoClose: 2000,
-        });
-      },
-    }
-  );
+  } = useMovies();
 
   const handlePosterClick = (movie) => {
     setSelectedMovie(movie);
@@ -82,15 +34,13 @@ const MoviePosters = () => {
     <>
       <h3 className="movie-heading text-white">My List</h3>
       <div className="movie-grid px-5">
-        {data?.pages.map((group, index) => (
+        {moviesData?.pages.map((group, index) => (
           <React.Fragment key={index}>
             {group.movies.map((movie) => (
               <div key={movie.id}>
                 <div className="movie-poster-container border-0">
                   <img
                     onClick={() => handlePosterClick(movie)}
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
                     className="movie-poster"
                     src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
                     alt={movie.title}
@@ -98,10 +48,15 @@ const MoviePosters = () => {
                   {isLoggedIn && (
                     <button
                       className="favourite-icon"
-                      onClick={() => updateFavouriteMutation.mutate(movie._id)}
+                      onClick={() =>
+                        toggleFavourite(
+                          movie._id,
+                          userFavourites.includes(movie._id)
+                        )
+                      }
                     >
                       <div className="heart-bg"></div>
-                      {!movie.isFavourite ? (
+                      {!userFavourites.includes(movie._id) ? (
                         <img
                           className="favourites-heart"
                           src="heart-unfilled.png"
@@ -142,36 +97,11 @@ const MoviePosters = () => {
         </button>
       </div>
 
-      <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        className="custom-modal"
-        onEntered={() =>
-          document
-            .querySelector(".modal-backdrop")
-            .classList.add("darker-backdrop")
-        }
-      >
-        <Modal.Header className="border-0">
-          <Modal.Title>{selectedMovie?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="d-flex gap-5">
-            <img
-              className="modal-movie-poster"
-              src={`https://image.tmdb.org/t/p/w200/${selectedMovie?.backdrop_path}`}
-              alt={selectedMovie?.title}
-            />
-            <p className="modal-text">{selectedMovie?.overview}</p>
-            <h2>{selectedMovie?.vote_average}/10</h2>
-          </div>
-        </Modal.Body>
-        <Modal.Footer className="border-0">
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <MovieModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        movie={selectedMovie}
+      />
     </>
   );
 };

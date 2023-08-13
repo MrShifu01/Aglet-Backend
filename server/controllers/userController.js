@@ -75,21 +75,4 @@ const logout = asyncHandler(async (req, res) => {
     });
   });
 
-// @desc Update user favourites
-// @route PUT /api/users/getUserData
-// @access Private
-const getUserData = asyncHandler(async (req, res) => {
-    const { id } = req.params
-    const userData = await User.findById(id)
-    console.log(userData)
-
-    if (userData) {
-        res.status(200).json(userData)
-    }
-    else {
-        res.status(404)
-        throw new Error('User not found')
-    }
-})
-
-export { login, signup, logout, getUserData };
+export { login, signup, logout};

@@ -28,15 +28,12 @@ const getMovies = asyncHandler(async (req, res) => {
 // @desc    Fetch favourite movies
 // @route   GET /api/movies/favourites
 // @access  Public
-const getFavouriteMovies = asyncHandler(async (req, res) => {
+const getAllMovies = asyncHandler(async (req, res) => {
     try {
-        const movies = await Movie.find({ isFavourite: true });
-        res.json({
-            movies,
-        });
+      const movies = await Movie.find();
+      res.json(movies);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+      res.status(500).json({ error: "Failed to fetch movies" });
     }
 });
 
@@ -73,4 +70,4 @@ const updateFavouriteMovie = asyncHandler(async (req, res) => {
 
 
 
-export { getMovies, getFavouriteMovies, updateFavouriteMovie };
+export { getMovies, getAllMovies, updateFavouriteMovie };
