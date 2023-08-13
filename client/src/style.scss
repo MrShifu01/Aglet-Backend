@@ -500,4 +500,13 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
+
+  .modal-body .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-movie-poster {
+    margin-bottom: 1rem;
+  }
 }

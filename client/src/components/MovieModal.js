@@ -25,7 +25,7 @@ const MovieModal = ({ showModal, setShowModal, movie }) => {
         <Modal.Title>{movie?.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="d-flex gap-5">
+        <div className="d-flex flex-column flex-md-row gap-5">
           {/* Display the movie backdrop image */}
           <img
             className="modal-movie-poster"
@@ -38,6 +38,7 @@ const MovieModal = ({ showModal, setShowModal, movie }) => {
 
           {/* Display the movie rating out of 10 */}
           <h2>{movie?.vote_average}/10</h2>
+          <p>Released in {movie?.release_date.slice(0,4)} </p>
         </div>
       </Modal.Body>
       <Modal.Footer className="border-0">
