@@ -5,8 +5,9 @@ dotenv.config();
 import Movie from "../models/movieModel.js";
 
 // Variables for the API (The Movie DB)
-const url =
-  "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=1&sort_by=popularity.desc";
+const BASE_URL = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&sort_by=popularity.desc";
+const MAX_PAGES = 3; // Adjust this to fetch more or fewer pages
+const getUrl = (page = 1) => `${BASE_URL}&page=${page}`;
 const options = {
   method: "GET",
   headers: {
@@ -18,14 +19,19 @@ const options = {
 
 // Fetch data from the API (The Movie DB)
 const fetchData = async () => {
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    const movies = data.results;
-    importData(movies);
-  } catch (error) {
-    console.log(error);
+  let allMovies = [];
+
+  for (let i = 1; i <= MAX_PAGES; i++) {
+    try {
+      const response = await fetch(getUrl(i), options);
+      const data = await response.json();
+      allMovies = allMovies.concat(data.results);
+    } catch (error) {
+      console.log(`Error fetching page ${i}:`, error);
+    }
   }
+
+  importData(allMovies);
 };
 
 // Import movie data into MongoDB
@@ -33,7 +39,6 @@ const importData = async (movies) => {
   try {
     await Movie.deleteMany();
 
-    // Take the first 3 movies from the movies array
     const limitedMovies = movies.slice(0, 45);
 
     await Movie.insertMany(limitedMovies);
