@@ -14,9 +14,9 @@ const ContactPage = () => {
             howzit
           </h2>
           <div className="contact-text opacity-75">
-            <p>Christian Stander</p>
-            <p>tel: 0632934685</p>
-            <p>email: <a href="mailto:stander.christian@gmail.com">stander.christian@gmail.com</a></p>
+            <p><strong>Christian Stander</strong></p>
+            <p><strong>tel</strong>: 0632934685</p>
+            <p><strong>email</strong>: <a href="mailto:stander.christian@gmail.com">stander.christian@gmail.com</a></p>
             <a
               href="https://www.linkedin.com/in/christian-stander-310818276/"
               target="_blank"

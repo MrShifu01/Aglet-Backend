@@ -9,7 +9,7 @@ router.post("/signup", signup);
 router.post("/logout", logout);
 
 // Add movie to user's favourites
-router.post("/:id/add", async (req, res) => {
+router.put("/:id/add", async (req, res) => {
   const userId = req.params.id;
   const movieId = req.body.movieId;
   try {
@@ -25,15 +25,15 @@ router.post("/:id/add", async (req, res) => {
 });
 
 // Remove movie from user's favourites
-router.post("/:id/remove", async (req, res) => {
+router.put("/:id/remove", async (req, res) => {
   const userId = req.params.id;
   const movieId = req.body.movieId;
+  console.log(userId, movieId)
   try {
     const user = await User.findById(userId);
-
+    
     // Convert the movieId to a string for comparison
     user.favourites = user.favourites.filter((id) => id.toString() !== movieId);
-
     await user.save();
     res.json({ success: true });
   } catch (error) {

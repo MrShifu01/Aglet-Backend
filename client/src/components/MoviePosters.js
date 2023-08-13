@@ -1,29 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { useAuth } from "./useAuth";
 import MovieModal from "./MovieModal";
-
-import useFavourites from "./useFavourites";
-import useMovies from "./useMovies";
+import { useInfiniteQuery } from "react-query";
 
 const MoviePosters = () => {
+  const userData = JSON.parse(localStorage.getItem("userData")) || {};
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-
+  const [userFavourites, setUserFavourites] = useState(() => {
+    return userData?.favourites || [];
+  });
   const { isLoggedIn } = useAuth();
-  const { userFavourites, toggleFavourite } = useFavourites();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      userData.favourites = userFavourites;
+      localStorage.setItem("userData", JSON.stringify(userData));
+    }
+  }, [userFavourites]);
+
+  const fetchMovies = async ({ pageParam = 1 }) => {
+    const response = await axios.get("/api/movies", {
+      params: {
+        page: pageParam,
+      },
+    });
+    return response.data;
+  };
+
   const {
-    moviesData,
+    data: moviesData,
     isError,
     error,
     isFetching,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useMovies();
+  } = useInfiniteQuery("movies", fetchMovies, {
+    getNextPageParam: (lastPage) => lastPage.nextPage || undefined,
+  });
 
   const handlePosterClick = (movie) => {
     setSelectedMovie(movie);
     setShowModal(true);
+  };
+
+  const toggleFavourite = async (movieId) => {
+    const isFavourite = userFavourites.includes(movieId);
+    if (isFavourite) {
+      await axios.put(`/api/users/${userData._id}/remove`, { movieId });
+      setUserFavourites((prev) => {
+        const updatedFavourites = prev.filter((id) => id !== movieId);
+        return updatedFavourites;
+      });
+      toast.success("Removed from favourites", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else {
+      await axios.put(`/api/users/${userData._id}/add`, { movieId });
+      setUserFavourites((prev) => {
+        const updatedFavourites = [...prev, movieId];
+        return updatedFavourites;
+      });
+      toast.success("Added to favourites", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
   };
 
   if (isError) {
@@ -34,7 +80,7 @@ const MoviePosters = () => {
     <>
       <h3 className="movie-heading text-white">My List</h3>
       <div className="movie-grid px-5">
-        {moviesData?.pages.map((group, index) => (
+        {moviesData?.pages?.map((group, index) => (
           <React.Fragment key={index}>
             {group.movies.map((movie) => (
               <div key={movie.id}>
@@ -48,12 +94,7 @@ const MoviePosters = () => {
                   {isLoggedIn && (
                     <button
                       className="favourite-icon"
-                      onClick={() =>
-                        toggleFavourite(
-                          movie._id,
-                          userFavourites.includes(movie._id)
-                        )
-                      }
+                      onClick={() => toggleFavourite(movie._id)}
                     >
                       <div className="heart-bg"></div>
                       {!userFavourites.includes(movie._id) ? (
